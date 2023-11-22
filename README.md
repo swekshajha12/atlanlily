@@ -48,7 +48,7 @@
         2. NRT transformation 
         3. NRT enrichment to downstream data
         4. NRT consumption
-        5. Storage
+        5. Metadata registry/Storage 
         6. Tenancy
         7. Data access security : PII, GDPR
         8. Authentication
@@ -66,14 +66,67 @@
         Metadata is data's data. It can be classified as technical, business or operational metadata.
         Wherein, technical metadata: datatype, column, table, schema, server etc
                  business metadata: data domain, line of business, business name etc
-                 Operational metadata: data Qc or validation
+                 Operational metadata: data Qc or validation    
+        Descriptive metadata includes information about who created a resource, as well as what it is about and what it contains. This is best accomplished through the use of semantic annotation.
+        Additional data about the way data elements are organized – their relationships and the structure they exist in – is included in structural metadata.
+        Administrative metadata contains information about the origin, type, and access rights of resources.
 
     2. NRT ingestion of metadata:
-        
-                    
+        This requirement has 2 parts to it i.e: NRT and ingestion
+        In order to handle both of these and the nature of problem where we
+        we need to ingest data from multiple different sources,
+
+        Options considered:
+
+            1. Kafka connect:
+                ecosystem of pluggable connectors
+                data integration system and ecosystem
+                Horizontally scalable
+                Fault tolerant
+                Extensible: Abstraction using json files
+                Declarative
+                
+                Connectors:
+                    pluggable software component
+                    interfaces to external systems and also to kafka
+                    Also exist as runtime entities
+                    source connectors act as producers
+                    sink connectors act as consumers
+
+            2. Kafka streams:
+                A producer produces the data into some topic and there are consumers
+                that consume that data from topic. 
+                This is not as flexible and pluggable as kafka connect 
+
+
+    3. NRT transformation and enrichment
+        Options considered:
+            
+            1. Spark Structured Streaming 
+                A project of apache Spark which is an open source analytics engine used for big data workloads. It can handle both batches as well as real-time analytics and data processing workloads.
+                Reliable
+                Active open source community
+                Well tested and used
+                Scalable
+                High throughput
+                Fault tolerant
+
+            2. Apache flink
+                
+                
+
 
 **Calculations**
-
+        Assumptions:
+            1. Metadata is coming from multiple sources
+            2. Ingestion qps: ~10kps
+            3. Consumption qps: ~9Kps
+            4. Transformations are not very heavy
+            5. Near real time latency of 5 minutes
+            6. 20 transformations on 1 metadata post ingestion at 5 times per hour
+            7. Enrichment and transformations can be eventually consistent
+            
+            
 
 **Components**
 
@@ -82,6 +135,8 @@
 
 
 **HLD**
+    source (cdc) -> kafka connect -> topic -> Cold storage
+                                           ->  apache flink -> Elastic search/cosmos
 
 
 **LLD**
@@ -90,7 +145,20 @@
 **How to run**
 
 
+
 **References**
+    <i> https://blog.open-metadata.org/how-we-built-the-ingestion-framework-1af0b6ff5c81 </i>
+    <i> https://hevodata.com/learn/metadata-driven-data-ingestion/ </i>
+
+
+**TERMS**
+    1. CDC
+        change data capture 
+        there are 2 types of CDC, query based and log based
+        query based: queries like new rows since last updated time are used to capture change in data
+                     JDBC source sink connector is a CDC connector for RDBMS
+        log based: Transaction logs of DB, can capture updates, inserts and can also tell you about
+                    DELETEs. This is not possible with query based CDC
 
 
 
