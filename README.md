@@ -102,16 +102,59 @@
     3. NRT transformation and enrichment
         Options considered:
             
-            1. Spark Structured Streaming 
-                A project of apache Spark which is an open source analytics engine used for big data workloads. It can handle both batches as well as real-time analytics and data processing workloads.
+            1. Spark Structured Streaming
                 Reliable
                 Active open source community
                 Well tested and used
                 Scalable
                 High throughput
                 Fault tolerant
+                NRT
+                Batch processing framework
+                Microbatching
+                Not very efficient memory management
+                Requires indepth knowledge to handle above
+                can have frequent OOMs
+                Uses DAG as execution engine
+                Good for heavy transformations
+                Basic abstraction is RDD (resilient distributed dataset) : leveraged for fault tolerance
+                slower than flink
+                more vibrant apis and detailed libraries
+                Harder to scale than flink, requires manual optimization
+                
 
             2. Apache flink
+                stream processing based on Windowing and checkpointing
+                Real time
+                fault tolerant (check pointing helps)
+                Own efficient automatic memory manager
+                OOM error would be rare
+                controlled cyclic dependency graph as execution engine
+                good for light heavy transformations
+                Basic abstraction is dataset and datastream api : leveraged for fault tolerance
+                faster recovery time and consistency
+                faster than spark (higher data processing speed)
+                Lesser apis and libraries in different languages
+                Easy to scale due to it's automatic optimization power
+
+            
+            3. HMT
+            
+
+            4. kafka streams
+                
+                
+                
+
+
+            Yahoo's benchmark:
+                In Yahoo!’s tests, Spark’s results were considerably worse than Flink and Storm’s, going up to 70 sec without back-pressure and 120 sec with back-pressure, compared with less than 1 sec for Flink and Storm, as shown in the following chart (percentile latency depicted for the rate 150K/s):
+                Reference in references tab below
+                
+                
+                
+                
+                
                 
                 
 
@@ -131,15 +174,22 @@
 **Components**
 
 
+
+
 **Trade-offs**
 
 
+
+
 **HLD**
+
     source (cdc) -> kafka connect -> topic -> Cold storage
                                            ->  apache flink -> Elastic search/cosmos
 
 
+
 **LLD**
+
 
 
 **How to run**
@@ -149,6 +199,9 @@
 **References**
     <i> https://blog.open-metadata.org/how-we-built-the-ingestion-framework-1af0b6ff5c81 </i>
     <i> https://hevodata.com/learn/metadata-driven-data-ingestion/ </i>
+    <i> https://github.com/yahoo/streaming-benchmarks </i>
+    <i> https://www.infoq.com/news/2015/12/yahoo-flink-spark-storm/ </i>
+
 
 
 **TERMS**
