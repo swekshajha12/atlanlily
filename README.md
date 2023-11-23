@@ -168,6 +168,8 @@
             5. Near real time latency of 5 minutes
             6. 20 transformations on 1 metadata post ingestion at 5 times per hour
             7. Enrichment and transformations can be eventually consistent
+
+            partition calculation
             
             
 
@@ -201,6 +203,12 @@
     <i> https://hevodata.com/learn/metadata-driven-data-ingestion/ </i>
     <i> https://github.com/yahoo/streaming-benchmarks </i>
     <i> https://www.infoq.com/news/2015/12/yahoo-flink-spark-storm/ </i>
+    <i> https://redpanda-data.medium.com/comparing-ksqldb-spark-sql-and-flink-sql-b4e495dc34fd </i>
+    <i> https://towardsdev.com/creating-a-realtime-cdc-pipeline-with-kafka-spark-14c9883ebf81 </i>
+    <i> https://www.xomnia.com/post/why-you-should-dive-into-delta-lake/ </i>
+    <i> https://hudi.apache.org </i>
+    <i> https://www.onehouse.ai/blog/apache-hudi-vs-delta-lake-vs-apache-iceberg-lakehouse-feature-comparison?utm_source=linkedin&utm_medium=cpc&utm_campaign=li-hudi-iceberg-delta&li_fat_id=4192b709-7a61-4177-9250-5e6c063648fb </i>
+    <i> https://www.chaossearch.io/blog/how-to-integrate-bi-data-visualization-tools-data-lake </i>
 
 
 
