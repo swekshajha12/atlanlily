@@ -32,11 +32,12 @@ atlanLily/
 
 1. Clone the Repository:
     Clone the sample project repository to your local machine:
-    git clone https://github.com/example/onion_architecture_example.git
+    git clone https://github.com/swekshajha12/atlanlily
 
-2. Navigate to the Project Directory:
-   cd onion_architecture_example
+2. Install requirements
+   pip install -r requirements.txt
 
+   
 3. Build the Docker Image:
    Build the Docker image using the provided Dockerfile:
    docker build -t app .

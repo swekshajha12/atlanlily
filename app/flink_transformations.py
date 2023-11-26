@@ -4,7 +4,6 @@ from pyflink.table import StreamTableEnvironment
 class FlinkTransformations:
     def transform(self, user_review, metadata, user_data):
         env = StreamExecutionEnvironment.get_execution_environment()
-        t_env = StreamTableEnvironment.create(env)
 
         # Convert user_review, metadata, and user_data to Flink DataStreams
         user_review_stream = env.from_collection([user_review])
@@ -28,7 +27,7 @@ class FlinkTransformations:
 if __name__ == "__main__":
     flink_transformations = FlinkTransformations()
 
-    # Example input data
+    # sample input
     user_review = {'review_id': 1, 'user_id': 123, 'review_text': 'Great product!'}
     metadata = {'metadata_id': 1, 'metadata_value': 'Positive'}
     user_data = {'data_user_id': 123, 'user_name': 'John Doe'}

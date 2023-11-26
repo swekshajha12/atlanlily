@@ -1,13 +1,28 @@
+from functools import partial
+
 from infrastructure.kafka_stream import KafkaStream
 from confluent_kafka import Producer, KafkaError
 from config import global_config
+import ast
 
 
 class KafkaProducer:
-    def __init__(self, topic, bootstrap_servers='localhost:9092'):
-        self.topic = topic
-        self.bootstrap_servers = bootstrap_servers
-        self.producer = Producer({'bootstrap.servers': self.bootstrap_servers})
+    _instance = None
+
+    def __init__(self):
+        self.host = global_config.KAFKA_HOST
+        self.port = global_config.KAFKA_PORT
+        self.config = global_config.KAFKA_CONFIG
+        self.producer = self.initialise_producer(self.host, self.port, self.config)
+
+    @staticmethod
+    def initialise_producer(host, port, config):
+        if KafkaProducer._instance is None:
+            server_dict = {"bootstrap.servers": f"{host}:{port}"}
+            server_config = ast.literal_eval(config)
+            parameters = {**server_dict, **server_config}
+            KafkaProducer._instance = Producer(parameters)
+        return KafkaProducer._instance
 
     def produce(self, data):
         # Convert data to bytes if needed
