@@ -1,5 +1,3 @@
-from functools import partial
-
 from infrastructure.kafka_stream import KafkaStream
 from confluent_kafka import Producer, KafkaError
 from config import global_config
