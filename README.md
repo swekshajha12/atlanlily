@@ -1,5 +1,3 @@
-Refer this for all design related info: https://docs.google.com/document/d/15u3XmUEFG8pfSP2-Lh7dpqqK-JbSCZHGcq6-gfdrvPE/edit?usp=sharing
-
 This is a sample setup of metadata ingestion and consumption pipeline. It uses kafka stream to get data from external sources
 and then the data is consumed by flink for transformations, which is then stored as files in the local database.
 
